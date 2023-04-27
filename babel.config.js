@@ -9,11 +9,14 @@ module.exports = function(api) {
         {
           root: ['./'],
           alias: {
+            '@': '/src',
             '@atoms': './src/atoms',
             '@components': './src/components',
             '@fixtures': './src/fixtures',
             '@screens': './src/screens',
-            '@themes': './src/themes'
+            '@themes': './src/themes',
+            '@hooks': './src/hooks',
+            '@types': './src/types'
           },
           extensions: ['.js', '.jsx', '.ts', '.tsx']
         }
