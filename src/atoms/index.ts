@@ -1,2 +1,5 @@
+export * as AnimatedBox from './AnimatedBox'
+export * as Bar from './Bar'
 export * as Box from './Box'
+export * as Container from './Container'
 export * as Text from './Text'
