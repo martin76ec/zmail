@@ -6,12 +6,12 @@ const DATA: Array<Note> = []
 
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
-    max: 8,
-    min: 4
+    max: 12,
+    min: 8
   },
   wordsPerSentence: {
-    max: 16,
-    min: 4
+    max: 32,
+    min: 16
   }
 })
 
@@ -24,9 +24,7 @@ for (let index = 0; index < 100; index++) {
     title: capitalizeFirstLetter(
       lorem.generateWords(Math.round(Math.random() * 3) + 2)
     ),
-    body: capitalizeFirstLetter(
-      lorem.generateWords(Math.round(Math.random() * 20) + 5)
-    )
+    body: capitalizeFirstLetter(lorem.generateWords())
   })
 }
 

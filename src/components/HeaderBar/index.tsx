@@ -11,6 +11,7 @@ const HeaderBar: React.FC<AnimatedBoxProps> = ({ children, ...props }) => {
         alignItems="center"
         mx="lg"
         my="md"
+        px="sm"
         minHeight={44}
       >
         {children}

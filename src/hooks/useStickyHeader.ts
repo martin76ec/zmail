@@ -1,7 +1,15 @@
-import { useState } from 'react'
-import { useSharedValue } from 'react-native-reanimated'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { LayoutChangeEvent } from 'react-native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import {
+  interpolate,
+  runOnUI,
+  useAnimatedScrollHandler,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming
+} from 'react-native-reanimated'
+import { useCallback, useState } from 'react'
+import { NativeScrollEvent } from 'react-native'
 
 const ANCHOR_INIT = -9999
 
@@ -15,7 +23,50 @@ export default function useStickyHeader() {
   const minY = -headerBarHeight
   const maxY = safeAreaInsets.top
 
-  const handleNoteListLayout = useCallback(({ event: LayoutChangeEvent }) => {
+  const handleNoteListLayout = useCallback((event: LayoutChangeEvent) => {
     setHeaderBarHeight(event.nativeEvent.layout.height)
   }, [])
+
+  const handleEndDrag = (event: NativeScrollEvent) => {
+    'worklet'
+    translationY.value = withTiming(maxY)
+  }
+
+  const handleScroll = useAnimatedScrollHandler(
+    {
+      onBeginDrag: event => {
+        anchorY.value = event.contentOffset.y
+      },
+      onScroll: event => {
+        const offsetY = event.contentOffset.y
+        let distY = offsetY - anchorY.value
+        if (anchorY.value === ANCHOR_INIT) distY = offsetY
+        let value =
+          offsetY <= -safeAreaInsets.top
+            ? maxY
+            : Math.max(minY, Math.min(maxY, translationY.value - distY))
+        translationY.value = value
+        anchorY.value = offsetY
+        progressY.value = interpolate(translationY.value, [minY, maxY], [0, 1])
+      },
+      onEndDrag: handleEndDrag,
+      onMomentumEnd: handleEndDrag
+    },
+    [minY, maxY, headerBarHeight]
+  )
+
+  const headerBarStyle = useAnimatedStyle(() => ({
+    transform: [
+      {
+        translateY: translationY.value
+      }
+    ]
+  }))
+
+  return {
+    handleNoteListLayout,
+    handleScroll,
+    headerBarStyle,
+    headerBarHeight
+  }
 }

@@ -14,11 +14,13 @@ const lorem = new LoremIpsum({
 const capitalizeFirstLetter = ([first, ...rest]: string): string =>
   first.toUpperCase() + rest.join('')
 
-DATA.push({
-  id: shortid.generate().toString(),
-  name: capitalizeFirstLetter(
-    lorem.generateWords(Math.round(Math.random() * 4))
-  )
-})
+for (let index = 0; index < 30; index++) {
+  DATA.push({
+    id: shortid.generate().toString(),
+    name: capitalizeFirstLetter(
+      lorem.generateWords(Math.round(Math.random() * 4))
+    )
+  })
+}
 
 export default DATA

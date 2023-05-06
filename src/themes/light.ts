@@ -1,4 +1,5 @@
 import { createTheme } from '@shopify/restyle'
+import { StatusBarStyle } from 'react-native'
 
 // Palette
 const p = {
@@ -31,11 +32,21 @@ const theme = createTheme({
     phone: 0,
     tablet: 768
   },
+  layout: {
+    xs: 4,
+    sm: 8,
+    md: 12,
+    lg: 16,
+    xl: 24,
+    xxl: 48,
+    hg: 128
+  },
   colors: {
     black: p.black,
     red: p.red,
     blue: p.blue,
     yellow: p.yellow,
+    white: p.paper00,
 
     $primary: p.blue70,
     $windowBackground: '#f0f0f0',
@@ -52,6 +63,9 @@ const theme = createTheme({
     md: 24,
     lg: 64,
     hg: 128
+  },
+  statusBar: {
+    barStyle: 'dark-content' as StatusBarStyle
   },
   textVariants: {
     defaults: {

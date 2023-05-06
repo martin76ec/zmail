@@ -8,6 +8,7 @@
       "@fixtures": ["src/fixtures"],
       "@screens/*": ["src/screens/*"],
       "@themes/*": ["src/themes/*"],
+      "@themes": ["src/themes"],
       "@hooks/*": ["src/hooks/*"],
       "@types/*": ["src/types/*"]
     }

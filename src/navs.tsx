@@ -5,8 +5,9 @@ import {
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import MainScreen from '@screens/Main'
 import * as React from 'react'
-import Sidebar from '@components/Sidebar'
+import SideBar from '@components/SideBar'
 import { NavigatorScreenParams } from '@react-navigation/native'
+import DetailScreen from './components/Detail'
 
 export type HomeDrawerParamList = { Main: {} }
 
@@ -49,7 +50,7 @@ function Home() {
   return (
     <NavigatorWrapper
       initialRouteName="Main"
-      drawerContent={props => <Sidebar {...props} />}
+      drawerContent={props => <SideBar {...props} />}
     >
       <Drawer.Screen
         name="Main"
@@ -67,7 +68,8 @@ export default function Navigations() {
         name="Home"
         component={Home}
         options={{ headerShown: false }}
-      ></Stack.Screen>
+      />
+      <Stack.Screen name="Detail" component={DetailScreen} />
     </Stack.Navigator>
   )
 }
