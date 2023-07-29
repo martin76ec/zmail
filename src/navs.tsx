@@ -47,6 +47,7 @@ function NavigatorWrapper({
 }
 
 function Home() {
+  debugger
   return (
     <NavigatorWrapper
       initialRouteName="Main"
